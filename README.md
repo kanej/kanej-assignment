@@ -14,6 +14,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
   - [Table of Contents](#table-of-contents)
   - [requirements](#requirements)
     - [Assessment criteria](#assessment-criteria)
+  - [Plan & Design](#plan--design)
   - [Maintainers](#maintainers)
   - [License](#license)
 
@@ -35,6 +36,11 @@ Bonus: for logging metrics (request count, bytes transferred)
 * Code quality - 5 pts (structure, style, package selection, efficiency) 
 * Documentation - 5 pts (could be as comments or a quick readme)
 * Written questions - 5 pts
+
+## Plan & Design
+
+I have put together an [intended plan and system design](./docs/plan-and-design.md),
+including my working assumptions and UI sketches.
 
 <!-- ## Install
 
