@@ -55,7 +55,7 @@ including my working assumptions and UI sketches.
 
 ## Development
 
-This is a node.js based project that uses docker to run local services (e.g. ipfs).
+This is a node.js based project that uses docker to run local services (e.g. ipfs and postgres).
 
 ### Setup
 
@@ -71,7 +71,24 @@ To run the supporting services, run docker compose on from the repo root:
 docker-compose up
 ```
 
-You should now have a running `ipfs` daemon.
+You should now have a running `ipfs` daemon, postgres server (available on port `5432`) and `adminer` a web ui for interacting with postgres.
+
+Postgres is initialised with the schema and test data in `./sql/setup.sql`. This includes a test admin user, and three random api keys:
+
+```json
+{
+  "username": "fleekadmin",
+  "password": "dwebforthewin"
+}
+```
+
+Adminer, the postgres web ui is available at http://localhost:9080, the login details are those of the postgres server, and are set in the docker-compose file:
+
+```yaml
+  POSTGRES_USER: fleek
+  POSTGRES_PASSWORD: fleek-password
+  POSTGRES_DB: assignment
+```
 
 You can test the IPFS daemon api endpoint with curl:
 
@@ -86,6 +103,12 @@ yarn start
 ```
 
 The webserver should now be available at http://localhost:12800.
+
+You can test whether the webserver is proxying with:
+
+```sh
+curl -H "Authorization: 1" -X POST http://127.0.0.1:12800/api/v0/swarm/addrs
+```
 
 ## Maintainers
 
