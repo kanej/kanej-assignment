@@ -42,7 +42,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
 * [x] Provide simple README doc, so we can properly build & run
 * [ ] Bonus: for logging metrics (request count, bytes transferred)
 * [x] written question: How would you improve this assignment for a production ready solution (e.g., security,deployment)
-* [ ] written question: Describe IPFS and compare it to other protocols e.g., HTTP?
+* [x] written question: Describe IPFS and compare it to other protocols e.g., HTTP?
 
 ### Assessment criteria
 
@@ -56,7 +56,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
 I have answered the written questions in their own markdown files:
 
 1. [How would you improve this assignment for a production ready solution](./docs/how-would-you-improve-this-assignment.md)
-2. Describe IPFS and compare it to other protocols e.g., HTTP
+2. [Describe IPFS and compare it to other protocols e.g., HTTP](./docs/what-is-ipfs.md)
 
 ## Plan & Design
 

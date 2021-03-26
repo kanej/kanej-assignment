@@ -11,7 +11,7 @@ a prototype to facilitate discussion. Some questions I would want to dig into wo
 * What is our intended uptime - and how are measuring it (i.e. proportion of authenticated proxied requests returned without error)? 99%/99.9%/99.99%?
 * What other KPIs do we care about for this service?
 * What is the purpose of the logging requirement: is it transactionally vital data that we can never lose, or is it for gathering metrics - and what are those metrics. In other words can we get it out of the database and into a search server like elasticsearch, or perhaps reduce the requirement down metrics gathering rather than paying the price of bullet-proof db storage for every log line?
-* What browsers are we going support for the web ui and are we supporting mobile?
+* What browsers are we going to support for the web ui and are we supporting mobile?
 * How important is the UI look and feel and UX to the success of the service?
 
 The answers to those questions will inform how 'intense' I would be about suggestions for moving into production.
@@ -26,7 +26,7 @@ Generically I would want to:
 * Add Application Performance monitoring (Datadog or Azure Insights) based on the metrics we identified as important - and to track the unexpected exceptions
 * Establish an approach to postgres database schema migrations for deployment (and testing of the deployment)
 * Add better styling to the web ui - a bit of material ui would lift it quickly above my programmer fugly - functional but ugly
-* Make login more robust (I would consider using a third party service for this if it is appropriate) by adding checks on number of wrong passwords, offering password reset, providing a means to logout.
+* Make login more robust (I would consider using a third party service for this if it is appropriate) by adding checks on the number of wrong passwords, offering password reset, providing a means to logout.
 * Do a round security checking for sql injections.
 * Improve unit testing of the server and maybe include integration tests against postgres
 * Potentially add end to end testing (i.e. cypress) against a known test postgres db, leaning on it more heavily if a large matrix of browsers/device sizes is required to be supported.
@@ -35,7 +35,7 @@ If the system is expected to see the load of thousands or tens of thousands of u
 
 If it is established that node.js logging to postgres is not enough to meet our performance requirements, based on load identified in the requirements, I would suggest the following:
 
-* Split the administration and proxing into separate apps
+* Split the administration and proxying into separate apps
 * Assuming a bottleneck is found my first guess would be the postgres check for a disabled api key (and load testing could be used to confirm this). My instinct is that the list of banned api keys should be read from redis by the proxy, with the administration app responsible for keeping redis and the postgres database in sync.
 * With the proxy only touching Redis when serving a request, it can be scaled horizontally and a reverse proxy put in front of the proxy servers.
 * The IPFS daemon can be clustered as well, see ipfs-cluster.
