@@ -7,7 +7,6 @@ class ApiKeyService {
   }
 
   async allow(apiKeyToken) {
-    console.log(apiKeyToken)
     try {
       const { apiKeyId } = JWT.verify(apiKeyToken, SECRET)
 

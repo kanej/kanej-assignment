@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router'
-import { Link } from 'react-router-dom'
+import Layout from '../components/layout'
+import RequestLogList from '../components/request-log-list'
 
 const ApiKeyDetails: React.FC = () => {
   const { apiKey } = useParams<{ apiKey: string }>()
-  console.log(apiKey)
 
   const [requestLogs, setRequestLogs] = useState([])
 
@@ -33,22 +33,9 @@ const ApiKeyDetails: React.FC = () => {
 
   return (
     <div>
-      <div>Request Logs</div>
-      <div>
-        <ul>
-          {requestLogs.map(({ id, url }) => (
-            <li key={id}>
-              {id} - {url}
-            </li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <Link to="/">
-          <button type="button">Back</button>
-        </Link>
-      </div>
+      <Layout>
+        <RequestLogList requestLogs={requestLogs} />
+      </Layout>
     </div>
   )
 }

@@ -36,7 +36,7 @@ class AdminService {
 
   async getRequestLogsFor(apiKeyId) {
     const result = await this.knexClient
-      .select(['id', 'url'])
+      .select(['id', 'api_key_id', 'url', 'created_at'])
       .from('request_logs')
       .where('api_key_id', '=', apiKeyId)
 

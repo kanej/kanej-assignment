@@ -4,3 +4,10 @@ export type ApiKey = {
   token: string
   enabled: boolean
 }
+
+export type RequestLog = {
+  id: number
+  api_key_id: number
+  url: string
+  created_at: string
+}

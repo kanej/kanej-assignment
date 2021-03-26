@@ -1,9 +1,14 @@
+const { JWT } = require('jose')
+const { SECRET } = require('../constants')
+
 const createRequestLogMiddleware = (requestLogService) => {
   return async (req, _res, next) => {
     try {
-      const apiKey = parseInt(req.headers.authorization, 10)
+      const apiKeyToken = req.headers.authorization.replace('bearer ', '')
 
-      await requestLogService.log(apiKey, { url: req.url })
+      const { apiKeyId } = JWT.verify(apiKeyToken, SECRET)
+
+      await requestLogService.log(apiKeyId, { url: req.url })
 
       return next()
     } catch (error) {
