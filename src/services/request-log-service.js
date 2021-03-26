@@ -5,8 +5,6 @@ class RequestLogService {
   }
 
   async log(apiKeyId, { url }) {
-    console.log('!!! Request captured')
-
     const response = await this.knexClient('request_logs').insert({
       api_key_id: apiKeyId,
       url,

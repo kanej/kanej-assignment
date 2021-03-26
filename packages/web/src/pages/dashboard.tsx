@@ -6,7 +6,7 @@ const Dashboard: React.FC = () => {
   const [apiKeys, setApiKeys] = useState<Array<ApiKey>>([])
 
   const handleAddApiKey = useCallback(async () => {
-    const response = await fetch(`http://localhost:12800/admin/api/api-keys`, {
+    const response = await fetch(`/admin/api/api-keys`, {
       method: 'PUT',
     })
 

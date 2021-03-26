@@ -1,3 +1,6 @@
+const { JWT } = require('jose')
+const { SECRET } = require('../constants')
+
 /* eslint-disable camelcase */
 class AdminService {
   constructor(knexClient) {
@@ -6,7 +9,7 @@ class AdminService {
 
   async getApiKeysFor(userId) {
     const result = await this.knexClient
-      .select(['id', 'user_id', 'enabled'])
+      .select(['id', 'user_id', 'token', 'enabled'])
       .from('api_keys')
       .where('user_id', '=', userId)
 
@@ -16,12 +19,19 @@ class AdminService {
   async createNewApiKeyFor(userId) {
     const newKey = {
       user_id: userId,
+      token: 'na',
       enabled: true,
     }
 
     const [{ id }] = await this.knexClient('api_keys').insert(newKey, ['id'])
 
-    return { id, ...newKey }
+    const token = JWT.sign({ userId, apiKeyId: id }, SECRET, {
+      issuer: 'https://kanej-assignment.com',
+    })
+
+    this.knexClient('api_keys').where({ id }).update({ token })
+
+    return { id, ...newKey, token }
   }
 
   async getRequestLogsFor(apiKeyId) {

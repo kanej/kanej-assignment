@@ -25,21 +25,31 @@ const ApiKeyList: React.FC<{
         <button onClick={addApiKey}>Add New API Key</button>
       </TitleSection>
       <div>
-        <ul>
-          {apiKeys
-            .sort((a, b) => (a.id > b.id ? 1 : -1))
-            .map(({ id, enabled }) => (
-              <li key={id}>
-                <p>
-                  key - {id} - status: {enabled ? 'enabled' : 'disabled'} -{' '}
-                  <Link to={`/api-keys/${id}`}>view</Link> -
-                  <button data-api-key-id={id} onClick={handleToggleEnabled}>
-                    {enabled ? 'Disable' : 'Enable'}
-                  </button>
-                </p>
-              </li>
-            ))}
-        </ul>
+        {apiKeys.length === 0 ? (
+          <div>
+            <p>
+              There are no api keys currently for you user, add one with the
+              "Add New API Key" button!
+            </p>
+          </div>
+        ) : (
+          <ul>
+            {apiKeys
+              .sort((a, b) => (a.id > b.id ? 1 : -1))
+              .map(({ id, token, enabled }) => (
+                <li key={id}>
+                  <p>
+                    key - {id} - token: {token} - status:{' '}
+                    {enabled ? 'enabled' : 'disabled'} -{' '}
+                    <Link to={`/api-keys/${id}`}>view</Link> -
+                    <button data-api-key-id={id} onClick={handleToggleEnabled}>
+                      {enabled ? 'Disable' : 'Enable'}
+                    </button>
+                  </p>
+                </li>
+              ))}
+          </ul>
+        )}
       </div>
     </div>
   )
