@@ -4,7 +4,7 @@ const createAuthenticateMiddleware = (apiKeyService) => {
       return res.sendStatus(403)
     }
 
-    const apiKey = req.headers.authorization
+    const apiKey = req.headers.authorization.replace('bearer ', '')
 
     try {
       const allow = await apiKeyService.allow(apiKey)

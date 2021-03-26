@@ -107,7 +107,7 @@ The webserver should now be available at http://localhost:12800.
 You can test whether the webserver is proxying with:
 
 ```sh
-curl -H "Authorization: <API-TOKEN>" -X POST http://127.0.0.1:12800/api/v0/swarm/addrs
+curl -H "Authorization: bearer <API-TOKEN>" -X POST http://127.0.0.1:12800/api/v0/swarm/addrs
 ```
 
 ## Maintainers
