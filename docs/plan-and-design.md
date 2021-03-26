@@ -7,7 +7,7 @@ Always a good idea to have a rough plan.
 * It is only the IPFS API endpoint that is being secured with authentication, not the web endpoint.
 * This is a coding challenge and so writing some code is involved, finding the right nginx plugin would be against the spirit.
 * The web ui includes email/password sign in, but does not mention a user registration flow, I am going to assume no registration flow is required and a hard-coded user and password (for the fleek admin) is acceptable.
-* Requests are to be logged to a 'db' for later viewing by the fleek admin, by db I am going to assume a relational database rather than just redis with persistence, or off to an elasticsearch cluster. This is assumption is based on the assignments scale and the request for a db rather than a store.
+* Requests are to be logged to a 'db' for later viewing by the fleek admin, by db I am going to assume a relational database rather than just redis with persistence, or off to an elasticsearch cluster. This assumption is based on the assignments scale and the request for a db rather than a store.
 * Only authorised requests are logged.
 
 ## Design

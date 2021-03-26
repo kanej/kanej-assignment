@@ -6,11 +6,16 @@
   "author": "John Kane <john@kanej.me>",
   "license": "MIT",
   "scripts": {
+    "install": "yarn --cwd ./packages/server && yarn --cwd ./packages/web",
+    "start": "concurrently \"yarn start:web\" \"yarn start:server\"",
     "start:web": "yarn --cwd ./packages/web start",
     "start:server": "yarn --cwd ./packages/server start",
     "test": "yarn --cwd ./packages/server test",
     "lint": "yarn --cwd ./packages/server lint && yarn --cwd ./packages/web lint",
     "format": "yarn --cwd ./packages/server format && yarn --cwd ./packages/web format",
     "format:check": "yarn --cwd ./packages/server format:check && yarn --cwd ./packages/web:check"
+  },
+  "devDependencies": {
+    "concurrently": "6.0.0"
   }
 }
