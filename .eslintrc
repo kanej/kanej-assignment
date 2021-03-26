@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "xo",
+    "xo-react",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:import/typescript",
+    "prettier"
+  ]
+}

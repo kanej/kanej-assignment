@@ -55,6 +55,14 @@ including my working assumptions and UI sketches.
 
 ## Development
 
+This is a node.js based project that uses docker to run local services (e.g. ipfs).
+
+To install the node dependencies, run `yarn` from the root of the repository:
+
+```sh
+yarn
+```
+
 To run the supporting services, run docker compose on from the repo root:
 
 ```
