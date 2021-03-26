@@ -5,6 +5,21 @@ import { ApiKey } from '../domain'
 const Dashboard: React.FC = () => {
   const [apiKeys, setApiKeys] = useState<Array<ApiKey>>([])
 
+  const handleAddApiKey = useCallback(async () => {
+    const response = await fetch(`http://localhost:12800/admin/api/api-keys`, {
+      method: 'PUT',
+    })
+
+    if (response.status !== 200) {
+      console.error('Unable to add api key')
+      return
+    }
+
+    const newApiKey = await response.json()
+
+    setApiKeys([...apiKeys, newApiKey])
+  }, [apiKeys])
+
   const HandleToggleEnabled = useCallback(
     async (apiKeyId) => {
       const keyId = parseInt(apiKeyId, 10)
@@ -67,7 +82,11 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <ApiKeyList apiKeys={apiKeys} toggleEnabled={HandleToggleEnabled} />
+      <ApiKeyList
+        apiKeys={apiKeys}
+        addApiKey={handleAddApiKey}
+        toggleEnabled={HandleToggleEnabled}
+      />
     </div>
   )
 }
