@@ -1,0 +1,55 @@
+# kanej-assignment
+
+[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
+
+> Authenticated proxy for IPFS API
+
+An assignment where the goal is "to secure a public IPFS API with simpleAPI keys (simply by providing a custom HTTP header) and build an app to manage the keys and view logs/metrics".
+
+A copy of the specification is available in the docs folder [here](./docs/Full-Stack-Engineer-Assignment.pdf).
+
+## Table of Contents
+
+- [kanej-assignment](#kanej-assignment)
+  - [Table of Contents](#table-of-contents)
+  - [requirements](#requirements)
+    - [Assessment criteria](#assessment-criteria)
+  - [Maintainers](#maintainers)
+  - [License](#license)
+
+## requirements
+
+* [ ] Create a React application with simple email/username + password authentication thatlets you create new or disable existing API keys
+* [ ] Create a proxy server that handles API Key authentication and forwards request to IPFS API
+* [ ] When requests are made to the proxy server , we should log them in a db with relation toAPI key
+* [ ] Disabling the API key should block the API request when using that key
+* [ ] Display the requests in the application under each API key that was created
+* [ ] Provide simple README doc, so we can properly build & run i
+Bonus: for logging metrics (request count, bytes transferred)
+* [ ] written question: How would you improve this assignment for a production ready solution (e.g., security,deployment)
+* [ ] written question: Describe IPFS and compare it to other protocols e.g., HTTP?
+
+### Assessment criteria
+
+* Completion/functionality - 10 pts (are all the pieces working as described?)
+* Code quality - 5 pts (structure, style, package selection, efficiency) 
+* Documentation - 5 pts (could be as comments or a quick readme)
+* Written questions - 5 pts
+
+<!-- ## Install
+
+```
+```
+
+## Usage
+
+```
+``` -->
+
+## Maintainers
+
+[@kanej](https://github.com/kanej)
+
+## License
+
+MIT © 2021 John Kane
