@@ -1,6 +1,6 @@
 const request = require('supertest')
 const express = require('express')
-const createAuthenticateMiddleware = require('./createAuthenticateMiddleware')
+const createAuthenticateMiddleware = require('./create-authenticate-middleware')
 
 describe('Create Authenticate Middleware', () => {
   let apiKey

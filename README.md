@@ -22,7 +22,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
 ## requirements
 
 * [ ] Create a React application with simple email/username + password authentication thatlets you create new or disable existing API keys
-* [ ] Create a proxy server that handles API Key authentication and forwards request to IPFS API
+* [x] Create a proxy server that handles API Key authentication and forwards request to IPFS API
 * [ ] When requests are made to the proxy server , we should log them in a db with relation toAPI key
 * [ ] Disabling the API key should block the API request when using that key
 * [ ] Display the requests in the application under each API key that was created
