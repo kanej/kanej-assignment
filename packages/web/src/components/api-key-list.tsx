@@ -17,6 +17,21 @@ const ApiKeyList: React.FC<{
     [toggleEnabled],
   )
 
+  const handleCopyToken = useCallback(
+    (ev) => {
+      const { apiKeyId } = ev.target.dataset
+      const keyId = parseInt(apiKeyId, 10)
+      const key = apiKeys.find(({ id }) => id === keyId)
+
+      if (!key) {
+        throw new Error('Could not find key')
+      }
+
+      navigator.clipboard.writeText(key.token)
+    },
+    [apiKeys],
+  )
+
   return (
     <div>
       <TitleSection>
@@ -33,22 +48,27 @@ const ApiKeyList: React.FC<{
             </p>
           </div>
         ) : (
-          <ul>
+          <List>
             {apiKeys
               .sort((a, b) => (a.id > b.id ? 1 : -1))
               .map(({ id, token, enabled }) => (
-                <li key={id}>
-                  <p>
-                    key - {id} - token: {token} - status:{' '}
-                    {enabled ? 'enabled' : 'disabled'} -{' '}
-                    <Link to={`/api-keys/${id}`}>view</Link> -
+                <ListEntry key={id}>
+                  <p>key - #{id}</p>
+                  <p>status - {enabled ? 'enabled' : 'disabled'}</p>
+                  <p>Token:</p>
+                  <TokenTextarea value={token} readOnly></TokenTextarea>
+                  <ActionBar>
+                    <button data-api-key-id={id} onClick={handleCopyToken}>
+                      Copy Token
+                    </button>
                     <button data-api-key-id={id} onClick={handleToggleEnabled}>
                       {enabled ? 'Disable' : 'Enable'}
                     </button>
-                  </p>
-                </li>
+                    <Link to={`/api-keys/${id}`}>View Logs</Link>
+                  </ActionBar>
+                </ListEntry>
               ))}
-          </ul>
+          </List>
         )}
       </div>
     </div>
@@ -59,6 +79,31 @@ const TitleSection = styled.div`
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
+`
+
+const List = styled.div`
+  display: grid;
+  grid-row-gap: 1rem;
+`
+
+const ListEntry = styled.div`
+  display: grid;
+  grid-row-gap: 1rem;
+  border: 1px solid gray;
+  padding: 2rem;
+  p {
+    margin: 0;
+  }
+`
+
+const TokenTextarea = styled.textarea`
+  width: 100%;
+`
+
+const ActionBar = styled.div`
+  display: grid;
+  grid-template-columns: auto auto auto 1fr;
+  grid-column-gap: 1rem;
 `
 
 export default memo(ApiKeyList)

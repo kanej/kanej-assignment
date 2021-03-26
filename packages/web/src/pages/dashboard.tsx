@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import ApiKeyList from '../components/api-key-list'
+import Layout from '../components/layout'
 import { ApiKey } from '../domain'
 
 const Dashboard: React.FC = () => {
@@ -79,11 +80,13 @@ const Dashboard: React.FC = () => {
 
   return (
     <div>
-      <ApiKeyList
-        apiKeys={apiKeys}
-        addApiKey={handleAddApiKey}
-        toggleEnabled={HandleToggleEnabled}
-      />
+      <Layout>
+        <ApiKeyList
+          apiKeys={apiKeys}
+          addApiKey={handleAddApiKey}
+          toggleEnabled={HandleToggleEnabled}
+        />
+      </Layout>
     </div>
   )
 }

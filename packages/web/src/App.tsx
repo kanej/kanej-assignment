@@ -55,21 +55,16 @@ function App() {
   return (
     <div className="App">
       <Authenticate>
-        <header>
-          <h2>Authenticated IPFS API Assignment</h2>
-        </header>
-        <main>
-          <Router>
-            <Switch>
-              <Route exact path="/">
-                <Dashboard />
-              </Route>
-              <Route exact path="/api-keys/:apiKey">
-                <ApiKeyDetails />
-              </Route>
-            </Switch>
-          </Router>
-        </main>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route exact path="/api-keys/:apiKey">
+              <ApiKeyDetails />
+            </Route>
+          </Switch>
+        </Router>
       </Authenticate>
     </div>
   )
