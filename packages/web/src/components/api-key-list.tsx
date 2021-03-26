@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { ApiKey } from '../domain'
 
 const ApiKeyList: React.FC<{ apiKeys: Array<ApiKey> }> = ({ apiKeys = [] }) => {
@@ -8,9 +9,10 @@ const ApiKeyList: React.FC<{ apiKeys: Array<ApiKey> }> = ({ apiKeys = [] }) => {
       <div>
         <ul>
           {apiKeys.map(({ id, enabled }) => (
-            <li>
+            <li key={id}>
               <p>
-                key - {id} - enabled {enabled}
+                key - {id} - enabled {enabled} -{' '}
+                <Link to={`/api-keys/${id}`}>view</Link>
               </p>
             </li>
           ))}

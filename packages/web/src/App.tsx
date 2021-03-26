@@ -1,39 +1,27 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import './App.css'
-import ApiKeyList from './components/api-key-list'
-import { ApiKey } from './domain'
+import ApiKeyDetails from './pages/api-key-details'
+import Dashboard from './pages/dashboard'
 
 function App() {
-  const [apiKeys, setApiKeys] = useState([])
-
-  useEffect(() => {
-    let mounted = true
-    const run = async () => {
-      if (!mounted) {
-        return
-      }
-
-      const response = await fetch('http://localhost:12800/admin/api/apikeys')
-
-      if (response.status !== 200) {
-        return
-      }
-
-      setApiKeys(await response.json())
-    }
-
-    run()
-
-    return () => {
-      mounted = false
-    }
-  }, [])
-
   return (
     <div className="App">
-      <h2>Authenticated IPFS API Assignment</h2>
-
-      <ApiKeyList apiKeys={apiKeys} />
+      <header>
+        <h2>Authenticated IPFS API Assignment</h2>
+      </header>
+      <main>
+        <Router>
+          <Switch>
+            <Route exact path="/">
+              <Dashboard />
+            </Route>
+            <Route exact path="/api-keys/:apiKey">
+              <ApiKeyDetails />
+            </Route>
+          </Switch>
+        </Router>
+      </main>
     </div>
   )
 }
