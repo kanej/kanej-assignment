@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const express = require('express')
 const cors = require('cors')
 const { createProxyMiddleware } = require('http-proxy-middleware')
@@ -23,7 +24,7 @@ const setupWebserver = (apiKeyService, requestLogService, adminService) => {
     res.send('Welcome to the Assignment Webserver')
   })
 
-  app.get('/admin/api/apikeys', async (req, res) => {
+  app.get('/admin/api/api-keys', async (req, res) => {
     try {
       /* TODO: pull from token */
       const userId = 1
@@ -36,6 +37,36 @@ const setupWebserver = (apiKeyService, requestLogService, adminService) => {
       return res.status('500').send()
     }
   })
+
+  app.get('/admin/api/api-keys/:apiKeyId/request-logs', async (req, res) => {
+    try {
+      const { apiKeyId } = req.params
+
+      const apiKeys = await adminService.getRequestLogsFor(apiKeyId)
+
+      res.send(apiKeys)
+    } catch (error) {
+      console.error(error)
+      return res.status('500').send()
+    }
+  })
+
+  app.post(
+    '/admin/api/api-keys/:apiKeyId',
+    express.json(),
+    async (req, res) => {
+      try {
+        const { id, user_id, enabled } = req.body
+
+        await adminService.setApiKeyEnabled(id, enabled)
+
+        res.send({ id, user_id, enabled })
+      } catch (error) {
+        console.error(error)
+        return res.status('500').send()
+      }
+    },
+  )
 
   return app
 }

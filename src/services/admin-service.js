@@ -11,6 +11,21 @@ class AdminService {
 
     return result
   }
+
+  async getRequestLogsFor(apiKeyId) {
+    const result = await this.knexClient
+      .select(['id', 'url'])
+      .from('request_logs')
+      .where('api_key_id', '=', apiKeyId)
+
+    return result
+  }
+
+  async setApiKeyEnabled(apiKeyId, enabled) {
+    return this.knexClient('api_keys')
+      .where({ id: apiKeyId })
+      .update({ enabled })
+  }
 }
 
 module.exports = AdminService
