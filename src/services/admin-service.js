@@ -29,7 +29,7 @@ class AdminService {
       issuer: 'https://kanej-assignment.com',
     })
 
-    this.knexClient('api_keys').where({ id }).update({ token })
+    await this.knexClient('api_keys').where({ id }).update({ token })
 
     return { id, ...newKey, token }
   }
