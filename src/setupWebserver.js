@@ -1,15 +1,26 @@
 /* eslint-disable camelcase */
 const express = require('express')
-const cors = require('cors')
+var cookieSession = require('cookie-session')
 const { createProxyMiddleware } = require('http-proxy-middleware')
 const createAuthenticateMiddleware = require('./middleware/create-authenticate-middleware')
 const createRequestLogMiddleware = require('./middleware/create-request-log-middleware')
-const { IPFS_ENDPOINT } = require('./constants')
+const { IPFS_ENDPOINT, SECRET } = require('./constants')
 
-const setupWebserver = (apiKeyService, requestLogService, adminService) => {
+const setupWebserver = (
+  apiKeyService,
+  requestLogService,
+  adminService,
+  loginService,
+) => {
   const app = express()
 
-  app.use(cors())
+  app.use(
+    cookieSession({
+      name: 'session',
+      keys: [SECRET],
+      maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    }),
+  )
 
   app.use(
     '/api',
@@ -24,10 +35,46 @@ const setupWebserver = (apiKeyService, requestLogService, adminService) => {
     res.send('Welcome to the Assignment Webserver')
   })
 
+  app.post('/admin/signin', express.json(), async (req, res) => {
+    try {
+      const { username, password } = req.body
+
+      const { authenticate, userId } = await loginService.signIn(
+        username,
+        password,
+      )
+
+      if (!authenticate) {
+        return res.sendStatus(403)
+      }
+
+      req.session.userId = userId
+
+      res.sendStatus(200)
+    } catch (error) {
+      console.error(error)
+      return res.status('500').send()
+    }
+  })
+
+  // Ensure sign in has appened for all /admin/api endpoints
+  app.use('/admin/api', (req, res, next) => {
+    if (!req.session || !req.session.userId) {
+      return res.sendStatus(403)
+    }
+
+    next()
+  })
+
+  app.get('/admin/api/whoami', async (req, res) => {
+    const userId = req.session.userId
+
+    res.send({ userId })
+  })
+
   app.get('/admin/api/api-keys', async (req, res) => {
     try {
-      /* TODO: pull from token */
-      const userId = 1
+      const userId = req.session.userId
 
       const apiKeys = await adminService.getApiKeysFor(userId)
 
@@ -56,9 +103,10 @@ const setupWebserver = (apiKeyService, requestLogService, adminService) => {
     express.json(),
     async (req, res) => {
       try {
+        const userId = req.session.userId
         const { id, user_id, enabled } = req.body
 
-        await adminService.setApiKeyEnabled(id, enabled)
+        await adminService.setApiKeyEnabled(id, userId, enabled)
 
         res.send({ id, user_id, enabled })
       } catch (error) {
@@ -67,6 +115,19 @@ const setupWebserver = (apiKeyService, requestLogService, adminService) => {
       }
     },
   )
+
+  app.put('/admin/api/api-keys/', express.json(), async (req, res) => {
+    try {
+      const userId = req.session.userId
+
+      const apiKey = await adminService.createNewApiKeyFor(userId)
+
+      res.send(apiKey)
+    } catch (error) {
+      console.error(error)
+      return res.status('500').send()
+    }
+  })
 
   return app
 }

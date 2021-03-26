@@ -29,19 +29,16 @@ const Dashboard: React.FC = () => {
         throw new Error('Unable to find api key')
       }
 
-      const response = await fetch(
-        `http://localhost:12800/admin/api/api-keys/${apiKeyId}`,
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            ...apiKey,
-            enabled: !Boolean(apiKey.enabled),
-          }),
+      const response = await fetch(`/admin/api/api-keys/${apiKeyId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
         },
-      )
+        body: JSON.stringify({
+          ...apiKey,
+          enabled: !Boolean(apiKey.enabled),
+        }),
+      })
 
       if (response.status !== 200) {
         console.error('Unable to read api keys')
@@ -64,7 +61,7 @@ const Dashboard: React.FC = () => {
         return
       }
 
-      const response = await fetch('http://localhost:12800/admin/api/api-keys')
+      const response = await fetch('/admin/api/api-keys')
 
       if (response.status !== 200) {
         return

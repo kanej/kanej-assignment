@@ -15,9 +15,7 @@ const ApiKeyDetails: React.FC = () => {
         return
       }
 
-      const response = await fetch(
-        `http://localhost:12800/admin/api/api-keys/${apiKey}/request-logs`,
-      )
+      const response = await fetch(`/admin/api/api-keys/${apiKey}/request-logs`)
 
       if (response.status !== 200) {
         return
