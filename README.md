@@ -15,6 +15,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
   - [requirements](#requirements)
     - [Assessment criteria](#assessment-criteria)
   - [Plan & Design](#plan--design)
+  - [Usage](#usage)
   - [Maintainers](#maintainers)
   - [License](#license)
 
@@ -51,6 +52,22 @@ including my working assumptions and UI sketches.
 
 ```
 ``` -->
+
+## Development
+
+To run the supporting services, run docker compose on from the repo root:
+
+```
+docker-compose up
+```
+
+You should now have a running `ipfs` daemon.
+
+You can test the api endpoint with curl:
+
+```sh
+curl -X POST http://127.0.0.1:5001/api/v0/swarm/addrs
+```
 
 ## Maintainers
 
