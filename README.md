@@ -1,6 +1,5 @@
 # kanej-assignment
 
-[![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![Main](https://github.com/kanej/kanej-assignment/actions/workflows/main.yaml/badge.svg)](https://github.com/kanej/kanej-assignment/actions/workflows/main.yaml)
 
 > Authenticated proxy for IPFS API
