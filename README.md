@@ -14,6 +14,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
   - [Table of Contents](#table-of-contents)
   - [Requirements](#requirements)
     - [Assessment criteria](#assessment-criteria)
+  - [Written Questions](#written-questions)
   - [Plan & Design](#plan--design)
   - [Implementation](#implementation)
   - [Install](#install)
@@ -40,7 +41,7 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
 * [x] Display the requests in the application under each API key that was created
 * [x] Provide simple README doc, so we can properly build & run
 * [ ] Bonus: for logging metrics (request count, bytes transferred)
-* [ ] written question: How would you improve this assignment for a production ready solution (e.g., security,deployment)
+* [x] written question: How would you improve this assignment for a production ready solution (e.g., security,deployment)
 * [ ] written question: Describe IPFS and compare it to other protocols e.g., HTTP?
 
 ### Assessment criteria
@@ -49,6 +50,13 @@ A copy of the specification is available in the docs folder [here](./docs/Full-S
 * Code quality - 5 pts (structure, style, package selection, efficiency) 
 * Documentation - 5 pts (could be as comments or a quick readme)
 * Written questions - 5 pts
+
+## Written Questions
+
+I have answered the written questions in their own markdown files:
+
+1. [How would you improve this assignment for a production ready solution](./docs/how-would-you-improve-this-assignment.md)
+2. Describe IPFS and compare it to other protocols e.g., HTTP
 
 ## Plan & Design
 
@@ -237,7 +245,7 @@ You can view an api keys request logs with the `View logs` link:
 
 ![view logs](./docs/view_logs.png "view logs")
 
-This will show the requests that have been made with an api key (currently no more than the url and timestamp, but `method`, `body`, `number of bytes` and more could all be added).
+This will show the authorised requests that have been made with an api key (currently no more than the url and timestamp, but `method`, `body`, `number of bytes` and more could all be added).
 
 ![request logs](./docs/request_logs.png "request logs")
 
