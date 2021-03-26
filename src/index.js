@@ -1,21 +1,10 @@
-const express = require('express')
-const app = express()
-const { createProxyMiddleware } = require('http-proxy-middleware')
-const port = 12800
+const ApiKeyService = require('./services/api-key-service')
+const { PORT } = require('./constants')
+const setupWebserver = require('./setupWebserver')
 
-const IPFS_ENDPOINT = 'http://localhost:5001'
+const apiKeyService = new ApiKeyService()
+const app = setupWebserver(apiKeyService)
 
-app.use(
-  '/api',
-  createProxyMiddleware({
-    target: IPFS_ENDPOINT,
-  }),
-)
-
-app.get('/', (req, res) => {
-  res.send('Welcome to the Assignment Webserver')
-})
-
-app.listen(port, () => {
-  console.log(`Assignment Webserver listening at http://localhost:${port}`)
+app.listen(PORT, () => {
+  console.log(`Assignment Webserver listening at http://localhost:${PORT}`)
 })
