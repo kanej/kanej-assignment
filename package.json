@@ -7,13 +7,15 @@
   "author": "John Kane <john@kanej.me>",
   "license": "MIT",
   "scripts": {
+    "start": "nodemon src/index.js",
     "format": "prettier --write \"./src/**/*.{js,jsx}\"",
     "format:check": "prettier --check \"./src/**/*.{js,jsx}\"",
     "lint": "eslint src --ext js",
     "lint:fix": "eslint --fix src --ext js"
   },
   "dependencies": {
-    "express": "4.17.1"
+    "express": "4.17.1",
+    "http-proxy-middleware": "1.0.6"
   },
   "devDependencies": {
     "eslint": "7.22.0",
@@ -23,6 +25,7 @@
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-react": "7.23.1",
     "eslint-plugin-react-hooks": "4.2.0",
+    "nodemon": "2.0.7",
     "prettier": "2.2.1"
   }
 }

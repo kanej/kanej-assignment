@@ -57,6 +57,8 @@ including my working assumptions and UI sketches.
 
 This is a node.js based project that uses docker to run local services (e.g. ipfs).
 
+### Setup
+
 To install the node dependencies, run `yarn` from the root of the repository:
 
 ```sh
@@ -71,11 +73,19 @@ docker-compose up
 
 You should now have a running `ipfs` daemon.
 
-You can test the api endpoint with curl:
+You can test the IPFS daemon api endpoint with curl:
 
 ```sh
 curl -X POST http://127.0.0.1:5001/api/v0/swarm/addrs
 ```
+
+To run the webserver in development mode:
+
+```sh
+yarn start
+```
+
+The webserver should now be available at http://localhost:12800.
 
 ## Maintainers
 
